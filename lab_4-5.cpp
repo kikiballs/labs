@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class Resistor{
+class Transistor{
     
     private:
         string resType ; 
@@ -12,13 +12,13 @@ class Resistor{
 
     public: 
     
-    Resistor(){
+    Transistor(){
         resType = " nothing" ;
         coef =  0  ; 
         maxC = 0 ;
     }
 
-    Resistor(string t, double i, double c) {
+    Transistor(string t, double i, double c) {
         resType = t;
         coef = i;
         maxC = c;
@@ -27,7 +27,7 @@ class Resistor{
 
     void input(){
         string line;
-        cout<< " enter resistor type" ;
+        cout<< " enter Transistor type" ;
 
         getline(cin, line);
 
@@ -72,19 +72,18 @@ class Resistor{
     }
         
 
-    ~Resistor(){
-        cout << " Resistor destroyed" ;
+    ~Transistor(){
+        cout << " Transistor destroyed" ;
     }
 };
 
 
 int main() {
 
-    Resistor r1;   
+    Transistor r1;   
     r1.input();    
     cout << "result ";
     r1.show();
 
     return 0;
 }
-
