@@ -1,89 +1,148 @@
-#include <iostream> 
+#include <iostream>
+#include <vector>
 #include <string>
-
+#include <windows.h>
 using namespace std;
 
-class Transistor{
+class Transistor {
+private:
+    string type;       
+    double gain;      
+    double maxCurrent;
+
+public:
     
-    private:
-        string resType ; 
-        double coef ; 
-        double maxC ;
+    Transistor() {
+        type = "Default";
+        gain = 1.0;
+        maxCurrent = 1.0;
+        cout << "Створено транзистор за замовчуванням.\n";
+    }
 
-    public: 
+   
+    Transistor(string t, double g, double c) {
+        setType(t);
+        setGain(g);
+        setMaxCurrent(c);
+        cout << "Створено транзистор з параметрами.\n";
+    }
+
+   
+    ~Transistor() {
+        cout << "Знищено транзистор: " << type << endl;
+    }
+
     
-    Transistor(){
-        resType = " nothing" ;
-        coef =  0  ; 
-        maxC = 0 ;
-    }
-
-    Transistor(string t, double i, double c) {
-        resType = t;
-        coef = i;
-        maxC = c;
-    }
-        
-
-    void input(){
-        string line;
-        cout<< " enter Transistor type" ;
-
-        getline(cin, line);
-
-        if (line.empty()) {
-            resType = "nothing";
-            coef =  0  ; 
-            maxC = 0 ;
-            return ;    
-        } 
-        else {
-            resType = line;
-        }
-        
-        cout << "enter coefficient  ";
-        getline(cin, line);
-        if (line.empty()) {
-            coef = 0.0;
+    void setType(string t) {
+        if (t == "pnp" || t == "npn") {
+            type = t;
         } else {
-            coef = stod(line);
+            cout << "Помилка: невідомий тип транзистора!\n";
+            type = "Unknown";
         }
+    }
 
-
-
-
-
-
-
-
-        cout<< " Enter max current :" ;\
-        getline(cin, line);
-        if (line.empty()) {
-            maxC = 0.0;
+    void setGain(double g) {
+        if (g <= 0) {
+            cout << "Помилка: коефіцієнт підсилення має бути > 0!\n";
+            gain = 1.0;
         } else {
-            maxC = stod(line);
+            gain = g;
         }
-        
     }
-    void show(){
-        cout << " Type :" << resType << '\n' ;
-        cout << " coefficient " << coef << '\n' ; 
-        cout << " Max current " << maxC << '\n' ;
-    }
-        
 
-    ~Transistor(){
-        cout << " Transistor destroyed" ;
+    void setMaxCurrent(double c) {
+        if (c <= 0) {
+            cout << "Помилка: максимальний струм має бути > 0!\n";
+            maxCurrent = 1.0;
+        } else {
+            maxCurrent = c;
+        }
+    }
+
+   
+    void input() {
+        cout << "\nВведіть дані для транзистора:\n";
+
+        cout << "Тип (pnp / npn): ";
+        string t;
+        cin >> t;
+        setType(t);
+
+        cout << "Коефіцієнт підсилення: ";
+        double g;
+        cin >> g;
+        setGain(g);
+
+        cout << "Максимальний струм (A): ";
+        double c;
+        cin >> c;
+        setMaxCurrent(c);
+    }
+
+  
+    void display() const {
+        cout << "Транзистор [Тип: " << type
+             << ", Підсилення: " << gain
+             << ", Макс. струм: " << maxCurrent << " A]\n";
+    }
+
+  
+    bool hasGainMoreThan(double n) const {
+        return gain > n;
+    }
+
+    bool canHandleCurrent(double c) const {
+        return maxCurrent >= c;
     }
 };
 
-
 int main() {
+    SetConsoleOutputCP(65001);  
+    SetConsoleCP(65001); 
+    
 
-    Transistor r1;   
-    r1.input();    
-    cout << "result ";
-    r1.show();
+  
+    Transistor defaultTransistor;
+    defaultTransistor.display();
+
+   
+    Transistor npnTransistor("npn", 150.0, 5.0);
+    npnTransistor.display();
+
+   
+    Transistor customTransistor;
+    customTransistor.input();
+    customTransistor.display();
+
+   
+    vector<Transistor> transistors = {
+        defaultTransistor,
+        npnTransistor,
+        customTransistor
+    };
+
+    cout << "\n--- Транзистори з коефіцієнтом підсилення більше 100 ---\n";
+    bool found = false;
+    for (const auto &t : transistors) {
+        if (t.hasGainMoreThan(100)) {
+            t.display();
+            found = true;
+        }
+    }
+    if (!found)
+        cout << "Немає транзисторів з таким коефіцієнтом.\n";
+
+    cout << "\n--- Транзистори, що витримують струм не менше 3 A ---\n";
+    found = false;
+    for (const auto &t : transistors) {
+        if (t.canHandleCurrent(3.0)) {
+            t.display();
+            found = true;
+        }
+    }
+    if (!found)
+        cout << "Немає транзисторів, що витримують 3 A.\n";
 
     return 0;
 }
