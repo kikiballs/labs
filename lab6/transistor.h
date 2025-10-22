@@ -5,7 +5,7 @@
 #include <array>
 #include <string>
 
-const int SIZE = 5; // розмір масиву
+const int SIZE_TBL = 5; // розмір масиву
 
 // Структура для зберігання даних про транзистор
 struct transistor_s_t {
@@ -17,7 +17,7 @@ struct transistor_s_t {
 // Клас для роботи з масивом транзисторів
 class Transistor {
 private:
-    std::array<transistor_s_t, SIZE> transistors;
+    std::array<transistor_s_t, SIZE_TBL> transistors;
     int count; // кількість введених елементів
 
 public:
@@ -28,6 +28,8 @@ public:
     void printAll() const;
     void updateGain(int index, double newGain);
     void updateMaxCurrent(int index, double newMaxCurrent);
+
+    void inputTransistor();
 };
 
 #endif

@@ -1,6 +1,9 @@
 #include "transistor.h"
+#include <windows.h>
 
 int main() {
+    SetConsoleOutputCP(65001);  
+    SetConsoleCP(65001);
     Transistor collection;
 
     collection.addTransistor("NPN", 100, 2.5);
@@ -13,6 +16,8 @@ int main() {
     std::cout << "\n Оновлення данихфіів:\n";
     collection.updateGain(1, 150);
     collection.updateMaxCurrent(0, 3.2);
+    collection.inputTransistor(); 
+
 
     collection.printAll();
 
