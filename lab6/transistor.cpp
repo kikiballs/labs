@@ -70,7 +70,7 @@ void Transistor::inputTransistor() {
     std::cout << "\n=== Введення нового транзистора ===\n";
 
     std::cout << "Введіть тип транзистора: ";
-    std::cin >> type;
+    std::getline(std::cin, type);
 
     do {
         std::cout << "Введіть коефіцієнт підсилення (>0): ";
