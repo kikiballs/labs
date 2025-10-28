@@ -54,13 +54,13 @@ void Transistor::removeTransistor(int index) {
         return;
     }
     transistors.erase(transistors.begin() + index);
-    std::cout << "✅ Транзистор видалено.\n";
+    std::cout << " Транзистор видалено.\n";
 }
 
 
 void Transistor::clearAll() {
     transistors.clear();
-    std::cout << "✅ Всі транзистори видалено.\n";
+    std::cout << " Всі транзистори видалено.\n";
 }
 
 
@@ -81,4 +81,24 @@ void Transistor::inputTransistor() {
     maxCurrent = std::stod(currentStr);
 
     addTransistor(type, gain, maxCurrent);
+}
+
+void Transistor::insertTransistor(int index, const std::string &type, double gain, double maxCurrent) {
+    if (index < 0 || index > (int)transistors.size()) {
+        std::cout << " Некоректний індекс для вставки!\n";
+        return;
+    }
+    transistors.insert(transistors.begin() + index, {type, gain, maxCurrent});
+    std::cout << " Транзистор вставлено у позицію " << index + 1 << ".\n";
+}
+
+
+void Transistor::swapTransistors(int index1, int index2) {
+    if (index1 < 0 || index1 >= (int)transistors.size() ||
+        index2 < 0 || index2 >= (int)transistors.size()) {
+        std::cout << " Некоректні індекси для обміну!\n";
+        return;
+    }
+    std::swap(transistors[index1], transistors[index2]);
+    std::cout << " Об'єкти з позицій " << index1 + 1 << " і " << index2 + 1 << " успішно обміняно!\n";
 }

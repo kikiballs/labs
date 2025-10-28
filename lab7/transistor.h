@@ -26,7 +26,13 @@ public:
 
     void removeTransistor(int index); 
     void clearAll();                  
-    void inputTransistor();           
+    void inputTransistor();       
+    
+        
+    void insertTransistor(int index, const std::string &type, double gain, double maxCurrent);
+    void swapTransistors(int index1, int index2);
+
+
 };
 
 #endif

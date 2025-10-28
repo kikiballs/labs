@@ -9,6 +9,13 @@ int main() {
 
     list.addTransistor("NPN", 100, 2.5);
     list.addTransistor("PNP", 120, 3.0);
+    list.addTransistor("MOSFET", 250, 4.5);
+    list.printAll();
+
+    list.insertTransistor(1, "JFET", 80, 2.0); 
+    list.printAll();
+
+    list.swapTransistors(0, 2); 
     list.printAll();
 
     list.inputTransistor();     
