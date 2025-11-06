@@ -14,26 +14,34 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         int type;
-        cout << "\n1 - Мультиметр \n 2 - Осцилограф \n Ваш вибір: ";
+        cout << "\n1 - Мультиметр \n2 - Осцилограф \n Ваш вибір: ";
         cin >> type;
 
-        Device* d;
-        if (type == 1) d = new Multimeter();
-        else d = new Oscilloscope();
+        Device* dev;
+        if (type == 1)
+            dev = new Multimeter();
+        else
+            dev = new Oscilloscope();
 
-        d->input();
-        list.push_back(d);
+        dev->input();
+        list.push_back(dev);
     }
 
     cout << "\n Список приладів \n";
-    double total = 0;
 
+    double totalPower = 0;
     for (auto d : list) {
         d->print();
-        total += d->getValue();
+        totalPower += d->getValue(); 
     }
 
-    cout << "\n Сумарний параметр = " << total << "\n";
+    double avgPower = totalPower / list.size();
 
-    for (auto d : list) delete d;
+    cout << "\n Загальна споживана потужність: " << totalPower << " Вт\n";
+    cout << "Середня потужність: " << avgPower << " Вт\n";
+
+    for (auto d : list)
+        delete d;
+
+    return 0;
 }

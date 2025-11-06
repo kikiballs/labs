@@ -29,12 +29,11 @@ public:
 
     void input() override;
     void print() const override;
-    double getValue() const override;
 };
 
 class Oscilloscope : public Device {
 private:
-    double bandwidth; 
+    double bandwidth;
 
 public:
     Oscilloscope(std::string n = "", double p = 0, double b = 0);
@@ -42,7 +41,6 @@ public:
 
     void input() override;
     void print() const override;
-    double getValue() const override;
 };
 
 #endif
