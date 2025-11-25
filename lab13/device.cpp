@@ -1,15 +1,12 @@
 #include "device.h"
 
-
-
-
 device::device(string n, double p) : name(n), power(p) {}
 device::~device() {}
 
 void device::input() {
 
     cout << "Введіть назву приладу: ";
-    cin >> name;
+    getline(cin, name);                           // <-- ТУТ ЗМІНА
     cout << "Введіть потужність : ";
     cin >> power;
     if (power < 0)
@@ -51,7 +48,7 @@ Multimetr::Multimetr(string n, double p, double a)
 
 void Multimetr::input() {
     cout << "Введіть назву мультиметра: ";
-    cin >> name;
+    getline(cin, name);                           // <-- ТУТ ЗМІНА
     cout << "Введіть потужність : ";
     cin >> power;
     cout << "Введіть точність : ";
@@ -83,7 +80,7 @@ Oscyloskop::Oscyloskop(string n, double p, double f)
 
 void Oscyloskop::input() {
     cout << "Введіть назву осцилографа: ";
-    cin >> name;
+    getline(cin, name);                        
     cout << "Введіть потужність : ";
     cin >> power;
     cout << "Введіть максимальну частоту : ";

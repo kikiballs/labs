@@ -5,6 +5,7 @@
 #include <string>
 
 
+
 class Transistor {
 private:
     std::string type;
@@ -21,47 +22,58 @@ public:
 
 
 
-template <typename T>
+
+
+template <typename T1, typename T2>
 class Storage {
 private:
-    T value;
+    T1 value1;
+    T2 value2;
 
 public:
-    Storage(T v) : value(v) {}
+    Storage(T1 v1, T2 v2) : value1(v1), value2(v2) {}
 
     void print() const {
-        std::cout << "Value: " << value << "\n";
+        std::cout << "General Storage: (" << value1 << ", " << value2 << ")\n";
     }
 };
 
 
 
-template <>
-class Storage<Transistor> {
+
+
+template <typename T2>
+class Storage<Transistor, T2> {
 private:
-    Transistor value;
+    Transistor tr;
+    T2 extra;
 
 public:
-    Storage(Transistor t) : value(t) {}
+    Storage(Transistor t, T2 e) : tr(t), extra(e) {}
 
     void print() const {
-        std::cout << "Transistor stored:\n";
-        value.print();
+        std::cout << "PARTIAL SPECIALIZATION Storage<Transistor, T2>:\n";
+        tr.print();
+        std::cout << "Extra value: " << extra << "\n";
     }
 };
 
 
 
+
 template <>
-class Storage<std::string> {
+class Storage<Transistor, std::string> {
 private:
-    std::string value;
+    Transistor tr;
+    std::string label;
 
 public:
-    Storage(std::string s) : value(s) {}
+    Storage(Transistor t, std::string s) : tr(t), label(s) {}
 
     void print() const {
-        std::cout << "STRING (specialized): [" << value << "]\n";
+        std::cout << "FULL SPECIALIZATION Storage<Transistor, std::string>:\n";
+        std::cout << "Label: " << label << "\n";
+        tr.print();
     }
 };
 

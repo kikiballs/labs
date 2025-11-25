@@ -14,6 +14,8 @@ int main() {
         Multimetr m;
         m.input();
 
+        cin.ignore(); 
+
         Oscyloskop o;
         o.input();
 
