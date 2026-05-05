@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class lab5 {
 
-    public static double getRectangleArea(double a, double b) {
-        return a * b;
+    public static double getParallelogramArea(double base, double height) {
+        return base * height;
     }
 
     public static double getMinOfThree(double num1, double num2, double num3) {
@@ -52,15 +52,15 @@ public class lab5 {
 
         System.out.println("Перевірка методів Лабораторної роботи 5");
 
-        System.out.println("\n1. Обчислення площі прямокутника");
-        System.out.print("Введіть довжину прямокутника: ");
-        double length = in.nextDouble();
+        System.out.println("\n1. Обчислення площі паралелограма");
+        System.out.print("Введіть основу паралелограма: ");
+        double base = in.nextDouble();
 
-        System.out.print("Введіть ширину прямокутника: ");
-        double width = in.nextDouble();
+        System.out.print("Введіть висоту паралелограма: ");
+        double height = in.nextDouble();
 
-        double area = getRectangleArea(length, width);
-        System.out.println("Площа прямокутника = " + area);
+        double area = getParallelogramArea(base, height);
+        System.out.println("Площа паралелограма = " + area);
 
         System.out.println("\n2. Знаходження найменшого з трьох чисел");
         System.out.print("Введіть перше число: ");
